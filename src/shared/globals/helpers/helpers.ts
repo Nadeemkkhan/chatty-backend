@@ -7,7 +7,7 @@ export class Helpers {
       .join(' ');
   }
 
-  static lowercase(str: string): string {
+  static lowerCase(str: string): string {
     return str.toLowerCase();
   }
 
@@ -21,7 +21,8 @@ export class Helpers {
     return parseInt(result, 10);
   }
 
-  static parseJson(prop: string): unknown {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  static parseJson(prop: string): any {
     try {
       JSON.parse(prop);
     } catch (error) {

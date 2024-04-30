@@ -1,14 +1,10 @@
 import dotenv from 'dotenv';
+import bunyan from 'bunyan';
 import cloudinary from 'cloudinary';
 
 dotenv.config({});
 
 class Config {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  createLogger(_arg0: string): import('bunyan') {
-    throw new Error('Method not implemented.');
-  }
-
   public DATABASE_URL: string | undefined;
   public JWT_TOKEN: string | undefined;
   public NODE_ENV: string | undefined;
@@ -19,6 +15,11 @@ class Config {
   public CLOUD_NAME: string | undefined;
   public CLOUD_API_KEY: string | undefined;
   public CLOUD_API_SECRET: string | undefined;
+  public SENDER_EMAIL: string | undefined;
+  public SENDER_EMAIL_PASSWORD: string | undefined;
+  public SENDGRID_API_KEY: string | undefined;
+  public SENDGRID_SENDER: string | undefined;
+
 
   private readonly DEFAULT_DATABASE_URL = 'mongodb://127.0.0.1:27017/chattyapp-backend';
 
@@ -33,6 +34,14 @@ class Config {
     this.CLOUD_NAME = process.env.CLOUD_NAME || '';
     this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
     this.CLOUD_API_SECRET = process.env.CLOUD_API_SECRET || '';
+    this.SENDER_EMAIL = process.env.SENDER_EMAIL || '';
+    this.SENDER_EMAIL_PASSWORD = process.env.SENDER_EMAIL_PASSWORD || '';
+    this.SENDGRID_API_KEY = process.env.SENDGRID_API_KEY || '';
+    this.SENDGRID_SENDER = process.env.SENDGRID_SENDER || '';
+  }
+
+  public createLogger(name: string): bunyan {
+    return bunyan.createLogger({ name, level: 'debug' });
   }
 
   public validateConfig(): void {
