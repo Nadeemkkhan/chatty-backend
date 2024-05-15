@@ -3,11 +3,10 @@
 @urlPath = api/v1
 
 ###
-POST {{baseUrl}}/{{urlPath}}/post
+POST {{baseUrl}}/{{urlPath}}/post/reaction
 Content-Type: application/json
 Accept: application/json
 withCredentials: true
-
 
 {
   "post": "This is my third post",
