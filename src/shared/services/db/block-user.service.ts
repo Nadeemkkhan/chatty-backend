@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 import { PushOperator } from 'mongodb';
 import { UserModel } from '@user/models/user.schema';
 
+
 class BlockUserService {
   public async blockUser(userId: string, followerId: string): Promise<void> {
     UserModel.bulkWrite([
@@ -9,7 +10,7 @@ class BlockUserService {
         updateOne: {
           filter: { _id: userId, blocked: { $ne: new mongoose.Types.ObjectId(followerId) } },
           update: {
-            $push: {
+            $pull: {
               blocked: new mongoose.Types.ObjectId(followerId)
             } as PushOperator<Document>
           }
@@ -19,12 +20,12 @@ class BlockUserService {
         updateOne: {
           filter: { _id: followerId, blockedBy: { $ne: new mongoose.Types.ObjectId(userId) } },
           update: {
-            $push: {
+            $pull: {
               blockedBy: new mongoose.Types.ObjectId(userId)
             } as PushOperator<Document>
           }
         }
-      },
+      }
     ]);
   }
 
@@ -49,7 +50,7 @@ class BlockUserService {
             } as PushOperator<Document>
           }
         }
-      },
+      }
     ]);
   }
 }
