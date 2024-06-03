@@ -4,6 +4,7 @@ import { config } from '@root/config';
 import { NotAuthorizedError } from './error-handler';
 import { AuthPayload } from '@auth/interfaces/auth.interface';
 
+
 export class AuthMiddleware {
   public verifyUser(req: Request, res: Response, next: NextFunction): void {
     if (!req.session?.jwt) {

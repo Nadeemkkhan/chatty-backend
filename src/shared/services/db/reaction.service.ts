@@ -6,12 +6,12 @@ import { ReactionModel } from '@reaction/models/reaction.schema';
 import { UserCache } from '@service/redis/user.cache';
 import { IUserDocument } from '@user/interfaces/user.interface';
 import { omit } from 'lodash';
-import mongoose from 'mongoose';
 import { INotificationDocument, INotificationTemplate } from '@notification/interfaces/notification.interface';
 import { NotificationModel } from '@notification/models/notification.schema';
 import { socketIONotificationObject } from '@socket/notification';
 import { notificationTemplate } from '@service/emails/templates/notifications/notification-template';
 import { emailQueue } from '@service/queues/email.queue';
+import mongoose from 'mongoose';
 
 const userCache: UserCache = new UserCache();
 
@@ -80,7 +80,8 @@ class ReactionService {
             [`reactions.${previousReaction}`]: -1
           }
         },
-        { new: true }
+        {new: true}
+
       )
     ]);
   }
